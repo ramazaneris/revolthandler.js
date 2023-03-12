@@ -32,8 +32,8 @@ const revoltHandler = require("revolthandler.js");
 const handler = new revoltHandler.Handler({
   client: client, //required
   prefix: "!", //required
-  folder: "./commands", //optional, (default : "./commands")
   owners: ["Your ID"], //required , optional add more owner Id
+  folder: "./commands", //optional, (default : "./commands")
 });
 client.once("ready", () => {
   handler.start();
@@ -45,7 +45,7 @@ client.loginBot("YOUR_BOT_TOKEN_HERE");
 
 ```js
 //"./commands/general/ping.js"
-module.exports = {
+exports.default = {
   name: "ping",
   description: "Ping!", //description :P
   //Be careful
@@ -60,7 +60,7 @@ module.exports = {
 
 ```js
 //"./commands/general/ping.js"
-module.exports = {
+exports.default = {
   name: "ping",
   aliases: ["delay"],
   description: "Ping!", //description :P
@@ -76,7 +76,7 @@ module.exports = {
 
 ```js
 //"./commands/owner/test.js"
-module.exports = {
+exports.default = {
   name: "test",
   aliases: ["eval"],
   ownerOnly: {
