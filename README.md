@@ -31,7 +31,7 @@ const client = new revolt.Client();
 const revoltHandler = require("revolthandler.js");
 const handler = new revoltHandler.Handler({
   client: client, //required
-  prefix: ["!"], //required, optional add more more prefixes
+  prefix: "!", //required
   folder: "./commands", //optional, (default : "./commands")
   owners: ["Your ID"], //required , optional add more owner Id
 });
@@ -94,4 +94,5 @@ module.exports = {
 
 - [Come to my server](https://rvlt.gg/zrmFWtJz)
 
-# Will add new features in the future# revolthandler.js
+# Will add new features in the future
+# revolthandler.js
