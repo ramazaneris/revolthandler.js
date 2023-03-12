@@ -39,8 +39,8 @@ export default function start(prop: any, handlerClient: any) {
     prop.client.on("message", (message: any) => {
       let owners = prop.owners;
       if (
-        !message.content.startsWith(prop.prefix) ||
-        prop.client.users.get(message.author_id).bot
+        prop.client.users.get(message.author_id).bot ||
+        !message.content.startsWith(prop.prefix) 
       )
         return;
       if (message.content.type) return;
