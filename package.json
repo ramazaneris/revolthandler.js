@@ -2,8 +2,8 @@
   "name": "revolthandler.js",
   "version": "1.0.11",
   "description": "Handle your code for revolt.js",
-  "types": "/src/types/index",
-  "main": "/src/dist/index",
+  "types": "src/types/index",
+  "main": "src/dist/index",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ramazaneris/revolthandler.js.git"
