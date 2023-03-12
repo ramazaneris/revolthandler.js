@@ -1,7 +1,7 @@
 import fs from "fs";
 import { resolve } from "path";
 import coloredConsole from "clcn";
-
+import {revoltHandler} from '../revoltHandler'
 const clcn = new coloredConsole();
 
 export default function start(prop: any, handlerClient: any) {
@@ -45,7 +45,7 @@ export default function start(prop: any, handlerClient: any) {
         return;
       if (message.content.type) return;
       const args = message.content.slice(prop.prefix.length).trim().split(/ +/);
-      require(resolve("./src/types/revoltHandler"))(
+      revoltHandler(
         message,
         args,
         prop.client,

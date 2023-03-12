@@ -3,6 +3,7 @@ const fs = require("fs");
 const { resolve } = require("path");
 const clcn_1 = require("clcn");
 const clcn = new clcn_1();
+const revoltHandler = require("../revoltHandler")
 function start_1(prop, handlerClient) {
   try {
     const commandsFolder = fs.readdirSync(prop.path);
@@ -44,7 +45,7 @@ function start_1(prop, handlerClient) {
         return;
       if (message.content.type) return;
       const args = message.content.slice(prop.prefix.length).trim().split(/ +/);
-      require(resolve("./src/dist/revoltHandler"))(
+      revoltHandler(
         message,
         args,
         prop.client,

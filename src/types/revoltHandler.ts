@@ -1,10 +1,10 @@
-module.exports = (
+function revoltHandler(
   message: any,
   args: any,
   client: any,
   handlerClient: any,
   owners: string[]
-) => {
+) {
   const commandName = args.shift().toLowerCase();
   const command =
     handlerClient.commands.get(commandName) ||
@@ -37,4 +37,6 @@ module.exports = (
   } catch (error) {
     console.error(error);
   }
-};
+}
+
+export {revoltHandler}
