@@ -40,6 +40,7 @@ function start_1(prop, handlerClient) {
       let owners = prop.owners;
       if (
         prop.client.users.get(message.author_id).bot ||
+        message.system ||
         !message.content.startsWith(prop.prefix)
       )
         return;

@@ -1,7 +1,7 @@
 import fs from "fs";
 import { resolve } from "path";
 import coloredConsole from "clcn";
-import {revoltHandler} from '../revoltHandler'
+import { revoltHandler } from "../revoltHandler";
 const clcn = new coloredConsole();
 
 export default function start(prop: any, handlerClient: any) {
@@ -40,18 +40,13 @@ export default function start(prop: any, handlerClient: any) {
       let owners = prop.owners;
       if (
         prop.client.users.get(message.author_id).bot ||
-        !message.content.startsWith(prop.prefix) 
+        message.system ||
+        !message.content.startsWith(prop.prefix)
       )
         return;
       if (message.content.type) return;
       const args = message.content.slice(prop.prefix.length).trim().split(/ +/);
-      revoltHandler(
-        message,
-        args,
-        prop.client,
-        handlerClient,
-        owners
-      );
+      revoltHandler(message, args, prop.client, handlerClient, owners);
     });
     clcn.log("txt:green", "revolthandler.js started");
   } catch (e: any) {
