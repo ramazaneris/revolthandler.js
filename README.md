@@ -32,6 +32,7 @@ command handler for revolt.js bot project
 ### Setup
 
 CommonJS
+
 ```js
 const revolt = require("revolt.js");
 const client = new revolt.Client();
@@ -49,6 +50,7 @@ client.loginBot("YOUR_BOT_TOKEN_HERE");
 ```
 
 EsModule
+
 ```ts
 //...
 import {Handler} from 'revolthandler.js'
@@ -59,6 +61,7 @@ cosnt handler = new Handler(client,"!",["Your Revolt ID"],"./commands")
 ### Standart using example
 
 CommonJS
+
 ```js
 //"./commands/general/ping.js"
 exports.default = {
@@ -73,6 +76,7 @@ exports.default = {
 ```
 
 EsModule
+
 ```ts
 export default {
   name:"ping",
@@ -126,7 +130,7 @@ exports.default = {
 exports.default = {
   name: "perm",
   ownerPerms: {
-    perms: ["KickMembers"],//You can see the perm names in: https://revolt.js.org/modules/permissions_definitions.html#Permission (onlyString)
+    perms: ["KickMembers"], //You can see the perm names in : https://revolt.js.org/modules/permissions_definitions.html#Permission (onlyString)
     errorMsg(message, member, command, perms) {
       //optional
       message.reply(
