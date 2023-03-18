@@ -126,7 +126,7 @@ exports.default = {
 exports.default = {
   name: "perm",
   ownerPerms: {
-    perms: ["KickMembers"],
+    perms: ["KickMembers"],//You can see the perm names in: https://revolt.js.org/modules/permissions_definitions.html#Permission (onlyString)
     errorMsg(message, member, command, perms) {
       //optional
       message.reply(
