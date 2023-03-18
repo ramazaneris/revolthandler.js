@@ -28,6 +28,30 @@ module.exports = (message, args, client, handlerClient, owners) => {
         }
       }
     }
+    if (command?.default?.onlyPerms) {
+      let perms = command?.default?.onlyPerms?.perms
+      if (!perms)
+        return new Error("You must write at least one perm");
+      if (
+        !message.member.hasPermission(
+          message.member.server,
+          perms
+        )
+      ) {
+        if (command?.default?.onlyPerms?.errorMsg) {
+          return command.default?.onlyPerms.errorMsg(
+            message,
+            message.member,
+            command?.default,
+            perms
+          );
+        } else {
+          return message.reply(
+            `You must have \`${perms.join(",")}\` permission(s) to use this command`
+          );
+        }
+      }
+    }
     command?.default?.code(message, args, client);
   } catch (error) {
     console.error(error);

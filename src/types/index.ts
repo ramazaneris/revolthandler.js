@@ -32,7 +32,7 @@ class Handler {
     this.path = path;
   }
   /**
-   * Connect to the your handler
+   * Start the your handler
    * @see
    **/
   start() {

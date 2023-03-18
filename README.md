@@ -12,10 +12,16 @@ Easy command handling for revolt.js
   - [Setup](#setup)
   - [Standart](#standart-using-example)
   - [Aliases](#aliases-example)
+  - [OwnerOnly](#only-owner-command-example)
+  - [PermsOnly](#only-perms-command-example)
 
 ## About
 
 command handler for revolt.js bot project
+
+## Badges
+
+[![NPM Downloads](https://img.shields.io/npm/dt/revolthandler.js.svg?style=flat-square)](https://www.npmjs.com/package/revolthandler.js)
 
 ## Install
 
@@ -25,24 +31,34 @@ command handler for revolt.js bot project
 
 ### Setup
 
+CommonJS
 ```js
 const revolt = require("revolt.js");
 const client = new revolt.Client();
 const revoltHandler = require("revolthandler.js");
-const handler = new revoltHandler.Handler({
-  client: client, //required
-  prefix: "!", //required
-  owners: ["Your ID"], //required , optional add more owner Id
-  folder: "./commands", //optional, (default : "./commands")
-});
+const handler = new revoltHandler.Handler(
+  client, //required
+  "!", //required
+  ["Your Revolt ID"], //required , optional add more owner Id
+  "./commands" //optional, (default : "./commands")
+);
 client.once("ready", () => {
   handler.start();
 });
 client.loginBot("YOUR_BOT_TOKEN_HERE");
 ```
 
+EsModule
+```ts
+//...
+import {Handler} from 'revolthandler.js'
+cosnt handler = new Handler(client,"!",["Your Revolt ID"],"./commands")
+//...
+```
+
 ### Standart using example
 
+CommonJS
 ```js
 //"./commands/general/ping.js"
 exports.default = {
@@ -54,6 +70,17 @@ exports.default = {
     message.channel.sendMessage("Pong");
   },
 };
+```
+
+EsModule
+```ts
+export default {
+  name:"ping",
+  description:"Ping!"
+  code(message:any,args:string[],client:any){
+    message.channel.sendMessage("Pong")
+  }
+}
 ```
 
 ### Aliases example
@@ -82,7 +109,8 @@ exports.default = {
   ownerOnly: {
     status: true,
     errorMsg(message, author, command) {
-      message.reply("You don't use this command");
+      //optional
+      message.reply("You can't use this command");
     },
   },
   code(message, args, client) {
@@ -91,8 +119,26 @@ exports.default = {
 };
 ```
 
+### Only perm(s) command example
+
+```js
+//"./commands/moderate/perm.js"
+exports.default = {
+  name: "perm",
+  ownerPerms: {
+    perms: ["KickMembers"],
+    errorMsg(message, member, command, perms) {
+      //optional
+      message.reply(
+        `You must have ${perms.join(",")} permission(s) to use this command`
+      );
+    },
+  },
+};
+```
 
 - [Come to my server](https://rvlt.gg/zrmFWtJz)
 
 # Will add new features in the future
+
 # revolthandler.js
