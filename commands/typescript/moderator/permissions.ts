@@ -1,9 +1,7 @@
 export default {
   name: "perm",
-  onlyPerms: { perms: ["KickMembers"] },
+  onlyPerms: { perms: ["KickMembers", "ManageServer"] },
   code(msg: any, args: any, client: any) {
-    let perms = [""];
-    console.log(typeof perms);
-    msg.reply("hi");
+    
   },
 };

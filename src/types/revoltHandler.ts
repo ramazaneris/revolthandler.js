@@ -40,7 +40,7 @@ function revoltHandler(
       if (
         !message.member.hasPermission(
           message.member.server,
-          perms
+          ...perms
         )
       ) {
         if (command?.default?.onlyPerms?.errorMsg) {

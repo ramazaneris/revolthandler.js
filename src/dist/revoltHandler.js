@@ -35,7 +35,7 @@ module.exports = (message, args, client, handlerClient, owners) => {
       if (
         !message.member.hasPermission(
           message.member.server,
-          perms
+          ...perms
         )
       ) {
         if (command?.default?.onlyPerms?.errorMsg) {
