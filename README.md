@@ -37,12 +37,12 @@ CommonJS
 const revolt = require("revolt.js");
 const client = new revolt.Client();
 const revoltHandler = require("revolthandler.js");
-const handler = new revoltHandler.Handler(
-  client, //required
-  "!", //required
-  ["Your Revolt ID"], //required , optional add more owner Id
-  "./commands" //optional, (default : "./commands")
-);
+const handler = new revoltHandler.Handler({
+  client: client, //required
+  prefix: "!", //required
+  owners: ["Your Revolt ID"], //required , optional add more owner Id
+  path: "./commands" //optional, (default : "./commands")
+});
 client.once("ready", () => {
   handler.start();
 });
@@ -53,8 +53,12 @@ EsModule
 
 ```ts
 //...
-import {Handler} from 'revolthandler.js'
-cosnt handler = new Handler(client,"!",["Your Revolt ID"],"./commands")
+import { Handler } from 'revolthandler.js'
+const handler = new Handler({client:client,//required
+prefix:"!",//required
+owners:["Your Revolt ID"],//required , optional add more owner Id
+path:"./commands" //optinal, (default : "./commands")
+})
 //...
 ```
 
@@ -82,7 +86,7 @@ export default {
   name:"ping",
   description:"Ping!"
   code(message:any,args:string[],client:any){
-    message.channel.sendMessage("Pong")
+    //Your code here
   }
 }
 ```
@@ -98,7 +102,6 @@ exports.default = {
   //Be careful
   code(message, args, client) {
     //Your code here
-    message.channel.sendMessage("Pong");
   },
 };
 ```
@@ -108,7 +111,7 @@ exports.default = {
 ```js
 //"./commands/owner/test.js"
 exports.default = {
-  name: "test",
+  name: "eval",
   aliases: ["eval"],
   ownerOnly: {
     status: true,
@@ -118,7 +121,7 @@ exports.default = {
     },
   },
   code(message, args, client) {
-    message.reply("pong");
+    //your code here
   },
 };
 ```
@@ -136,6 +139,29 @@ exports.default = {
       message.reply(
         `You must have ${perms.join(",")} permission(s) to use this command`
       );
+    },
+    code(msg, args, client) {
+      //Your code here
+    },
+  },
+};
+```
+
+### Allow DM
+
+```js
+//"./commands/general/indm"
+exports.default = {
+  name: "indm",
+  allowDM: {
+    //be careful "DM", not "Dm or dm"
+    status: true,
+    errorMsg(message, author, client) {
+      //optional
+      message.reply("You can't use this commmand in dm or group");
+    },
+    code(message, args, client) {
+      //Your code here
     },
   },
 };
