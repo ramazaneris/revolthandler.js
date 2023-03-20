@@ -15,21 +15,27 @@ function find(fn: any, thisArg: any) {
 }
 
 handlerClient.commands.find = find;
+
+interface Prop {
+  client: any;
+  prefix: string;
+  owners: string[];
+  path?: string;
+}
 class Handler {
   client: any;
-  path: string;
+  path: any;
   owners: string[];
   prefix: string;
-  constructor(
-    client: any,
-    prefix: string,
-    owners: string[],
-    path: string = "./commands"
-  ) {
-    this.client = client;
-    this.prefix = prefix;
-    this.owners = owners;
-    this.path = path;
+
+  /**
+   * @see {client:client,prefix:"!",owners:["id1","id2",...],path:"./commands"}
+   **/
+  constructor(props: Prop) {
+    this.client = props.client;
+    this.prefix = props.prefix;
+    this.owners = props.owners;
+    this.path = props.path || "./commands";
   }
   /**
    * Start the your handler

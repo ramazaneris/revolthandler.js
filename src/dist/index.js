@@ -12,12 +12,18 @@ function find(fn, thisArg) {
   return void 0;
 }
 handlerClient.commands.find = find;
+
 class Handler {
-  constructor(client, prefix, owners, path = "./commands") {
-    this.client = client;
-    this.prefix = prefix;
-    this.owners = owners;
-    this.path = path;
+  /**
+   * @see {client:client,prefix:"!",owners:["id1","id2",...],path:"./commands"}
+   **/
+  constructor(
+    props = { client: Object, prefix: String, owners: Array, path: String }
+  ) {
+    this.client = props.client;
+    this.prefix = props.prefix;
+    this.owners = props.owners;
+    this.path = props.path || "./commands";
   }
   /**
    * Start the your handler
