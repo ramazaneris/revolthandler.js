@@ -14,10 +14,6 @@ function revoltHandler(
     );
   try {
     if (!command?.default) return;
-    if (client.channels.get(message.channel_id).server_id === null)
-      return message.reply(
-        "> I don't support in dm groups\nPlease wait new updates for dm group"
-      );
     if (command?.default?.ownerOnly) {
       if (command?.default?.ownerOnly.status) {
         if (owners.includes(message.author_id) === false) {
@@ -33,16 +29,25 @@ function revoltHandler(
         }
       }
     }
+    if (command?.default?.allowDM) {
+      if (command?.default?.allowDM.status !== true) {
+        if (client.channels.get(message.channel_id).server_id === null) {
+          if (command?.default?.allowDM.errorMsg) {
+            return command?.default?.allowDM.errorMsg(
+              message,
+              message.author,
+              client
+            );
+          } else {
+            return message.reply("You can't use this command in dm");
+          }
+        }
+      }
+    }
     if (command?.default?.onlyPerms) {
-      let perms:string [] = command?.default?.onlyPerms?.perms
-      if (!perms)
-        return new Error("You must write at least one perm");
-      if (
-        !message.member.hasPermission(
-          message.member.server,
-          ...perms
-        )
-      ) {
+      let perms: string[] = command?.default?.onlyPerms?.perms;
+      if (!perms) return new Error("You must write at least one perm");
+      if (!message.member.hasPermission(message.member.server, ...perms)) {
         if (command?.default?.onlyPerms?.errorMsg) {
           return command.default?.onlyPerms.errorMsg(
             message,
@@ -52,7 +57,9 @@ function revoltHandler(
           );
         } else {
           return message.reply(
-            `You must have \`${perms.join(",")}\` permission(s) to use this command`
+            `You must have \`${perms.join(
+              ","
+            )}\` permission(s) to use this command`
           );
         }
       }
