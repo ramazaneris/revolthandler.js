@@ -14,6 +14,7 @@ Easy command handling for revolt.js
   - [Aliases](#aliases-example)
   - [OwnerOnly](#only-owner-command-example)
   - [PermsOnly](#only-perms-command-example)
+  - [AllowDM](#allow-dm)
 
 ## About
 
