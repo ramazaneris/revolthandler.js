@@ -1,9 +1,9 @@
-"use strict";
-exports.Handler = void 0;
-const { start_1 } = require("./functions/start");
-var handlerClient = {};
+import start from "./functions/start";
+
+var handlerClient: any = {};
 handlerClient.commands = new Map();
-function find(fn, thisArg) {
+
+function find(fn: any, thisArg: any) {
   if (typeof fn !== "function") throw new TypeError(`${fn} is not a function`);
   if (typeof thisArg !== "undefined") fn = fn.bind(thisArg);
   for (const [key, val] of handlerClient.commands) {
@@ -11,15 +11,25 @@ function find(fn, thisArg) {
   }
   return void 0;
 }
+
 handlerClient.commands.find = find;
 
+interface Prop {
+  client: any;
+  prefix: string;
+  owners: string[];
+  path?: string;
+}
 class Handler {
+  client: any;
+  path: any;
+  owners: string[];
+  prefix: string;
+
   /**
    * @see {client:client,prefix:"!",owners:["id1","id2",...],path:"./commands"}
    **/
-  constructor(
-    props = { client: Object, prefix: String, owners: Array, path: String }
-  ) {
+  constructor(props: Prop) {
     this.client = props.client;
     this.prefix = props.prefix;
     this.owners = props.owners;
@@ -30,7 +40,8 @@ class Handler {
    * @see
    **/
   start() {
-    start_1(this, handlerClient);
+    start(this, handlerClient);
   }
 }
-exports.Handler = Handler;
+
+export { Handler };

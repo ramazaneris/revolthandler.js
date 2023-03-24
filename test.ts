@@ -1,15 +1,15 @@
-import revolt, { Client } from "revolt.js";
+import { Client } from "revolt.js";
 import "dotenv/config";
-import { Handler } from "./src/types/index";
+import { Handler } from "./dist/index";
 var bot = new Client();
 var handler = new Handler({
   client: bot,
   prefix: "!",
   owners: ["01FCXFBQPYCBZWX40NSBYXYAWW"],
-  path: "./commands/typescript",
+  path: "./commands",
 });
 
-bot.once("ready", () => {
+bot.on("ready", () => {
   console.log("Bot ready!");
   handler.start();
 });

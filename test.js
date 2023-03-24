@@ -5,13 +5,13 @@ require("dotenv/config");
 const index_1 = require("./src/dist/index");
 var bot = new revolt_js_1.Client();
 var handler = new index_1.Handler({
-  client: bot,
-  prefix: "!",
-  owners: ["01FCXFBQPYCBZWX40NSBYXYAWW"],
-  path: "./commands/javascript",
+    client: bot,
+    prefix: "!",
+    owners: ["01FCXFBQPYCBZWX40NSBYXYAWW"],
+    path: "./commands",
 });
 bot.once("ready", () => {
-  console.log("Bot ready!");
-  handler.start();
+    console.log("Bot ready!");
+    handler.start();
 });
 bot.loginBot(`${process.env.BOT_TOKEN}`);

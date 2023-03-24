@@ -1,20 +1,20 @@
-import fs from "fs";
 import { resolve } from "path";
 import coloredConsole from "clcn";
 import { revoltHandler } from "../revoltHandler";
+import { readdirSync } from "fs";
 const clcn = new coloredConsole();
 
 export default function start(prop: any, handlerClient: any) {
   try {
-    const commandsFolder: any = fs.readdirSync(prop.path);
+    const commandsFolder: any = readdirSync(prop.path);
     for (const folder of commandsFolder) {
       let commandFiles: any;
-      let filetypesjs = fs
-        .readdirSync(`${prop.path}/${folder}`)
-        .filter((file: any) => file.endsWith(".js"));
-      let filetypests = fs
-        .readdirSync(`${prop.path}/${folder}`)
-        .filter((file: any) => file.endsWith(".ts"));
+      let filetypesjs = readdirSync(`${prop.path}/${folder}`).filter(
+        (file: any) => file.endsWith(".js")
+      );
+      let filetypests = readdirSync(`${prop.path}/${folder}`).filter(
+        (file: any) => file.endsWith(".ts")
+      );
       filetypests ? (commandFiles = filetypests) : (commandFiles = filetypesjs);
       for (const file of commandFiles) {
         const command = require(resolve(`${prop.path}/${folder}/${file}`));
