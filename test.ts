@@ -6,7 +6,7 @@ var handler = new Handler({
   client: bot,
   prefix: "!",
   owners: ["01FCXFBQPYCBZWX40NSBYXYAWW"],
-  path: "./commands",
+  path: "./commands/typescript",
 });
 
 bot.on("ready", () => {
