@@ -27,7 +27,6 @@ function revoltHandler(message, client, handlerClient, owners, prefix) {
   } else if (withOutPrefix) {
     command = withOutPrefix;
   }
-  console.log(command);
   try {
     if (!command?.default) return;
     if (command?.default?.ownerOnly) {
