@@ -1,6 +1,7 @@
 export default {
   name: "ping",
-  code(msg: any,args: any,bot: any) {
-    msg.reply("pong")
+  aliases: ["delay"],
+  code(msg: any, args: any, bot: any) {
+    msg.reply("pong");
   },
 };

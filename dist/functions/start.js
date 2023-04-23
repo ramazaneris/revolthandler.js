@@ -37,8 +37,7 @@ function start(prop, handlerClient) {
       if (prop.client.users.get(message.author_id).bot || message.system)
         return;
       if (message.content.type) return;
-      const args = message.content.slice(prop.prefix.length).trim().split(/ +/);
-      revoltHandler(message, args, prop.client, handlerClient, owners);
+      revoltHandler(message, prop.client, handlerClient, owners, prop.prefix);
     });
     console.log(clcn.txtGreen("revolthandler.js started"));
   } catch (e) {

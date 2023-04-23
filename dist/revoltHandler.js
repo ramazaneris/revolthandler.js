@@ -1,17 +1,33 @@
-function revoltHandler(message, args, client, handlerClient, owners) {
-  const cmdNamefNP = message?.content?.trim().split(/ +/).shift();
+function revoltHandler(message, client, handlerClient, owners, prefix) {
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const cmdNamefNP = message.content.trim().split(/ +/).shift();
   const commandName = args.shift().toLowerCase();
-  const command =
+  let command;
+
+  let withPrefix =
     handlerClient.commands.get(commandName) ||
     handlerClient.commands.find(
       (cmd) =>
         cmd?.default?.aliases && cmd?.default?.aliases.includes(commandName)
-    ) ||
-    handlerClient.commands.get(cmdNamefNP) ||
-    handlerClient.commands.find(
-      (cmd) =>
-        cmd?.default?.aliases && cmd?.default?.aliases.includes(cmdNamefNP)
     );
+  let withOutPrefix =
+    handlerClient.commands.get(cmdNamefNP) &&
+    handlerClient.commands.get(cmdNamefNP)?.default?.nonPrefixed
+      ? handlerClient.commands.get(cmdNamefNP)
+      : undefined ||
+        handlerClient.commands.find((cmd) =>
+          cmd?.default?.aliases &&
+          cmd?.default?.aliases.includes(cmdNamefNP) &&
+          cmd?.default?.nonPrefixed
+            ? cmd?.default?.aliases.includes(cmdNamefNP)
+            : undefined
+        );
+  if (withPrefix) {
+    command = withPrefix;
+  } else if (withOutPrefix) {
+    command = withOutPrefix;
+  }
+  console.log(command);
   try {
     if (!command?.default) return;
     if (command?.default?.ownerOnly) {
