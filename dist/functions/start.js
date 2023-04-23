@@ -34,11 +34,7 @@ function start(prop, handlerClient) {
     }
     prop.client.on("message", (message) => {
       let owners = prop.owners;
-      if (
-        prop.client.users.get(message.author_id).bot ||
-        message.system ||
-        !message.content.startsWith(prop.prefix)
-      )
+      if (prop.client.users.get(message.author_id).bot || message.system)
         return;
       if (message.content.type) return;
       const args = message.content.slice(prop.prefix.length).trim().split(/ +/);

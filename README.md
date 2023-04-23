@@ -15,6 +15,11 @@ Easy command handling for revolt.js
   - [OwnerOnly](#only-owner-command-example)
   - [PermsOnly](#only-perms-command-example)
   - [AllowDM](#allow-dm)
+  - [NonPrefixed](#non-prefixed)
+
+## Warn
+
+#### This version work with [revolt.js@6.0.20](https://www.npmjs.com/package/revolt.js/v/6.0.20)
 
 ## About
 
@@ -42,7 +47,7 @@ const handler = new revoltHandler.Handler({
   client: client, //required
   prefix: "!", //required
   owners: ["Your Revolt ID"], //required , optional add more owner Id
-  path: "./commands" //optional, (default : "./commands")
+  path: "./commands", //optional, (default : "./commands")
 });
 client.once("ready", () => {
   handler.start();
@@ -52,14 +57,15 @@ client.loginBot("YOUR_BOT_TOKEN_HERE");
 
 EsModule
 
-```ts
+```js
 //...
-import { Handler } from 'revolthandler.js'
-const handler = new Handler({client:client,//required
-prefix:"!",//required
-owners:["Your Revolt ID"],//required , optional add more owner Id
-path:"./commands" //optinal, (default : "./commands")
-})
+import { Handler } from "revolthandler.js";
+const handler = new Handler({
+  client: client, //required
+  prefix: "!", //required
+  owners: ["Your Revolt ID"], //required , optional add more owner Id
+  path: "./commands", //optinal, (default : "./commands")
+});
 //...
 ```
 
@@ -151,7 +157,7 @@ exports.default = {
 ### Allow DM
 
 ```js
-//"./commands/general/indm"
+//"./commands/general/indm.js"
 exports.default = {
   name: "indm",
   allowDM: {
@@ -164,6 +170,19 @@ exports.default = {
     code(message, args, client) {
       //Your code here
     },
+  },
+};
+```
+
+### Non Prefixed
+
+```js
+//"./commands/general/nonprefixed.js"
+exports.default = {
+  name: "withoutprefix", //WARN : The command name is case sensitive here!
+  nonPrefixed: true,
+  code(message, args, client) {
+    //Your code here
   },
 };
 ```

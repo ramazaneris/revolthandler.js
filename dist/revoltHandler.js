@@ -1,10 +1,16 @@
 function revoltHandler(message, args, client, handlerClient, owners) {
+  const cmdNamefNP = message?.content?.trim().split(/ +/).shift();
   const commandName = args.shift().toLowerCase();
   const command =
     handlerClient.commands.get(commandName) ||
     handlerClient.commands.find(
       (cmd) =>
         cmd?.default?.aliases && cmd?.default?.aliases.includes(commandName)
+    ) ||
+    handlerClient.commands.get(cmdNamefNP) ||
+    handlerClient.commands.find(
+      (cmd) =>
+        cmd?.default?.aliases && cmd?.default?.aliases.includes(cmdNamefNP)
     );
   try {
     if (!command?.default) return;
