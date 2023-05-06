@@ -24,6 +24,7 @@ function revoltHandler(message, client, handlerClient, owners, prefix) {
         );
   if (withPrefix) {
     command = withPrefix;
+    if (!message.content.startsWith(prefix)) return;
   } else if (withOutPrefix) {
     command = withOutPrefix;
   }
