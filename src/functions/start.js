@@ -1,6 +1,6 @@
 const { resolve } = require("path");
 const clcn = require("clcn");
-const { revoltHandler } = require("../revoltHandler");
+const { revoltHandler } = require("./revoltHandler");
 const { readdirSync } = require("fs");
 
 function start(prop, handlerClient) {

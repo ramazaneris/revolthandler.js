@@ -1,17 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const revolt_js_1 = require("revolt.js");
+const revoltjs = require("revolt.js");
+const { Handler } = require("./src/index");
 require("dotenv/config");
-const index = require("./dist/index");
-var bot = new revolt_js_1.Client();
-var handler = new index.Handler({
-    client: bot,
-    prefix: "!",
-    owners: ["01FCXFBQPYCBZWX40NSBYXYAWW"],
-    path: "./commands/javascript",
+const bot = new revoltjs.Client();
+var handler = new Handler({
+  client: bot,
+  prefix: "!",
+  owners: ["01FCXFBQPYCBZWX40NSBYXYAWW"],
+  path: "./tests/javascript",
 });
 bot.once("ready", () => {
-    console.log("Bot ready!");
-    handler.start();
+  handler.start();
+  console.log("Bot ready!");
 });
 bot.loginBot(`${process.env.BOT_TOKEN}`);

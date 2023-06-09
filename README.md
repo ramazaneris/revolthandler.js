@@ -9,13 +9,15 @@ Easy command handling for revolt.js
 - [About](#about)
 - [Installation](#install)
 - [Example Usage](#example)
-  - [Setup](#setup)
-  - [Standart](#standart-using-example)
-  - [Aliases](#aliases-example)
-  - [OwnerOnly](#only-owner-command-example)
-  - [PermsOnly](#only-perms-command-example)
-  - [AllowDM](#allow-dm)
-  - [NonPrefixed](#non-prefixed)
+  - [Handler](#handler)
+    - [Setup](#setup)
+    - [Standart](#standart-using-example)
+    - [Aliases](#aliases-example)
+    - [OwnerOnly](#only-owner-command-example)
+    - [PermsOnly](#only-perms-command-example)
+    - [AllowDM](#allow-dm)
+    - [NonPrefixed](#non-prefixed)
+  - [Embed Builder & Uploader](#embed-builder--uploader)
 
 ## Warn
 
@@ -35,7 +37,9 @@ command handler for revolt.js bot project
 
 ## Example
 
-### Setup
+### Handler
+
+#### Setup
 
 CommonJS
 
@@ -69,7 +73,7 @@ const handler = new Handler({
 //...
 ```
 
-### Standart using example
+#### Standart using example
 
 CommonJS
 
@@ -98,7 +102,7 @@ export default {
 }
 ```
 
-### Aliases example
+#### Aliases example
 
 ```js
 //"./commands/general/ping.js"
@@ -113,7 +117,7 @@ exports.default = {
 };
 ```
 
-### Only owner command example
+#### Only owner command example
 
 ```js
 //"./commands/owner/test.js"
@@ -133,7 +137,7 @@ exports.default = {
 };
 ```
 
-### Only perm(s) command example
+#### Only perm(s) command example
 
 ```js
 //"./commands/moderate/perm.js"
@@ -154,7 +158,7 @@ exports.default = {
 };
 ```
 
-### Allow DM
+#### Allow DM
 
 ```js
 //"./commands/general/indm.js"
@@ -174,7 +178,7 @@ exports.default = {
 };
 ```
 
-### Non Prefixed
+#### Non Prefixed
 
 ```js
 //"./commands/general/nonprefixed.js"
@@ -183,6 +187,30 @@ exports.default = {
   nonPrefixed: true,
   code(message, args, client) {
     //Your code here
+  },
+};
+```
+
+### Embed Builder & Uploader
+
+#### All in one
+
+```js
+const { EmbedBuilder, Uploader } = require("revolthandler.js");
+exports.default = {
+  name: "coolembed",
+  async code(message, args, client) {
+    const myuploader = new Uploader(client);
+    const myemb = new EmbedBuilder();
+    myemb
+      .setDescription("Cool describe")
+      .setColour("red") //hex code or name is acceptable
+      .setTitle("Cool title")
+      .setMedia(
+        await myuploader.upload("imagelink/imagebuffer", "filename.png")
+      ) ////You can add an big picture or file
+      .setUrl("https://www.npmjs.com/package/revolthandler.js")
+      .setIconUrl("imagelink"); //You can add an picture in front of the title
   },
 };
 ```

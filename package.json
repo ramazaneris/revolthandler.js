@@ -1,9 +1,9 @@
 {
   "name": "revolthandler.js",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Handle your code for revolt.js",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ramazaneris/revolthandler.js.git"
@@ -23,10 +23,10 @@
   "dependencies": {
     "clcn": "^2.0.1",
     "dotenv": "^16.0.3",
-    "revolt.js": "^6.0.20",
-    "typescript": "^5.0.2"
+    "revolt.js": "^6.0.20"
   },
   "devDependencies": {
-    "@types/node": "^18.15.0"
+    "@types/node": "^18.15.0",
+    "typescript": "^5.1.3"
   }
 }
