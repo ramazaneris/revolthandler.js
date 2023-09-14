@@ -1,23 +1,20 @@
-const { Client } = require("revolt.js");
+import { Client, Message } from "revolt.js/lib/esm";
 const { Handler } = require("./src/index");
 require("dotenv/config");
-const bot = new Client();
-const handler = new Handler({
+const bot = new Client({});
+var handler = new Handler({
   client: bot,
-  prefix: "/",
+  prefix: "!",
   owners: ["01FCXFBQPYCBZWX40NSBYXYAWW"],
   path: "./tests/javascript",
 });
-
 bot.once("ready", () => {
+  handler.start();
   console.log("Bot ready!");
-  handler.start()
 });
 
-bot.on("messageReactionAdd", (msg, userId, emote) => {
-  console.log(msg);
-  console.log(userId);
-  console.log(emote);
+bot.on("messageCreate", (msg: Message) => {
+  console.log(msg.authorId);
 });
 
 bot.loginBot(`${process.env.BOT_TOKEN}`);

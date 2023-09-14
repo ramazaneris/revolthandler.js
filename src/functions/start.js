@@ -32,9 +32,10 @@ function start(prop, handlerClient) {
         }
       }
     }
-    prop.client.on("message", (message) => {
+    prop.client.on("messageCreate", async (message) => {
       let owners = prop.owners;
-      if (prop.client.users.get(message.author_id).bot || message.system)
+      let user = prop.client.users.get(message.authorId);
+      if (user.bot || message.systemMessage)
         return;
       if (message.content.type) return;
       revoltHandler(message, prop.client, handlerClient, owners, prop.prefix);

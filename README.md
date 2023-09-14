@@ -211,6 +211,7 @@ exports.default = {
       ) ////You can add an big picture or file
       .setUrl("https://www.npmjs.com/package/revolthandler.js")
       .setIconUrl("imagelink"); //You can add an picture in front of the title
+    message.channel.sendMessage({ embeds: [myemb] });
   },
 };
 ```

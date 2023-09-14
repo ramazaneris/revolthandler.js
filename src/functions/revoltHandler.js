@@ -32,7 +32,7 @@ function revoltHandler(message, client, handlerClient, owners, prefix) {
     if (!command?.default) return;
     if (command?.default?.ownerOnly) {
       if (command?.default?.ownerOnly.status) {
-        if (owners.includes(message.author_id) === false) {
+        if (owners.includes(message.authorId) === false) {
           if (command?.default?.ownerOnly.errorMsg) {
             return command?.default?.ownerOnly.errorMsg(
               message,
@@ -47,7 +47,7 @@ function revoltHandler(message, client, handlerClient, owners, prefix) {
     }
     if (command?.default?.allowDM) {
       if (command?.default?.allowDM.status !== true) {
-        if (client.channels.get(message.channel_id).server_id === null) {
+        if (client.channels.get(message.channelId).serverId === null) {
           if (command?.default?.allowDM.errorMsg) {
             return command?.default?.allowDM.errorMsg(
               message,
