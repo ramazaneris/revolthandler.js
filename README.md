@@ -13,15 +13,11 @@ Easy command handling for revolt.js
         -   [Setup](#setup)
         -   [Standart](#standart-using-example)
         -   [Aliases](#aliases-example)
-        -   [OwnerOnly](#only-owner-command-example)
-        -   [PermsOnly](#only-perms-command-example)
-        -   [AllowDM](#allow-dm)
+        -   [ownerOnly](#only-owner-command-example)
+        -   [onlyPerms](#only-perms-command-example)
+        -   [allowDM](#allow-dm)
         -   [NonPrefixed](#non-prefixed)
     -   [Embed Builder & Uploader](#embed-builder--uploader)
-
-## Warn
-
-#### This version work with revolt.js@npm:revolt.js-update
 
 ## About
 

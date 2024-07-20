@@ -11,7 +11,7 @@ const handler = new Handler({
     path: "./tests",
 });
 
-bot.once("ready", () => {
+bot.on("ready", () => {
     console.log("Bot ready!");
     handler.start();
 });

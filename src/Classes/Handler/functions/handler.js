@@ -33,7 +33,7 @@ function revoltHandler(message, client, handlerClient, owners, prefix) {
         if (!command?.default) return;
         if (command?.default?.ownerOnly) {
             if (command?.default?.ownerOnly.status) {
-                if (owners.includes(message.authorId) === false) {
+                if (owners.includes(message.author.id) === false) {
                     if (command?.default?.ownerOnly.errorMsg) {
                         return command?.default?.ownerOnly.errorMsg(
                             message,
@@ -48,7 +48,7 @@ function revoltHandler(message, client, handlerClient, owners, prefix) {
         }
         if (command?.default?.allowDM) {
             if (command?.default?.allowDM.status !== true) {
-                if (client.channels.get(message.channelId).serverId === null) {
+                if (!message.server?.id) {
                     if (command?.default?.allowDM.errorMsg) {
                         return command?.default?.allowDM.errorMsg(
                             message,
@@ -66,9 +66,7 @@ function revoltHandler(message, client, handlerClient, owners, prefix) {
         if (command?.default?.onlyPerms) {
             let perms = command?.default?.onlyPerms?.perms;
             if (!perms) return new Error("You must write at least one perm");
-            if (
-                !message.member.hasPermission(message.member.server, ...perms)
-            ) {
+            if (!message.member.hasPermission(message.server, ...perms)) {
                 if (command?.default?.onlyPerms?.errorMsg) {
                     return command.default?.onlyPerms.errorMsg(
                         message,
