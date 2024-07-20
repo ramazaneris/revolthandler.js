@@ -1,5 +1,5 @@
-const { Handler } = require("./Classes/Handler");
-const { EmbedBuilder } = require("./Classes/EmbedBuilder");
-const { Uploader } = require("./Classes/Uploader");
+const { Handler } = require("./Classes/Handler/index");
+const { EmbedBuilder } = require("./Classes/EmbedBuilder/index");
+const { Uploader } = require("./Classes/Uploader/index");
 
 module.exports = { Handler, EmbedBuilder, Uploader };

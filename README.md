@@ -6,22 +6,22 @@ Easy command handling for revolt.js
 
 ## Table of contents
 
-- [About](#about)
-- [Installation](#install)
-- [Example Usage](#example)
-  - [Handler](#handler)
-    - [Setup](#setup)
-    - [Standart](#standart-using-example)
-    - [Aliases](#aliases-example)
-    - [OwnerOnly](#only-owner-command-example)
-    - [PermsOnly](#only-perms-command-example)
-    - [AllowDM](#allow-dm)
-    - [NonPrefixed](#non-prefixed)
-  - [Embed Builder & Uploader](#embed-builder--uploader)
+-   [About](#about)
+-   [Installation](#install)
+-   [Example Usage](#example)
+    -   [Handler](#handler)
+        -   [Setup](#setup)
+        -   [Standart](#standart-using-example)
+        -   [Aliases](#aliases-example)
+        -   [OwnerOnly](#only-owner-command-example)
+        -   [PermsOnly](#only-perms-command-example)
+        -   [AllowDM](#allow-dm)
+        -   [NonPrefixed](#non-prefixed)
+    -   [Embed Builder & Uploader](#embed-builder--uploader)
 
 ## Warn
 
-#### This version work with [revolt.js@6.0.20](https://www.npmjs.com/package/revolt.js/v/6.0.20)
+#### This version work with revolt.js@npm:revolt.js-update
 
 ## About
 
@@ -48,13 +48,13 @@ const revolt = require("revolt.js");
 const client = new revolt.Client();
 const revoltHandler = require("revolthandler.js");
 const handler = new revoltHandler.Handler({
-  client: client, //required
-  prefix: "!", //required
-  owners: ["Your Revolt ID"], //required , optional add more owner Id
-  path: "./commands", //optional, (default : "./commands")
+    client: client, //required
+    prefix: "!", //required
+    owners: ["Your Revolt ID"], //required , optional add more owner Id
+    path: "./commands", //optional, (default : "./commands")
 });
 client.once("ready", () => {
-  handler.start();
+    handler.start();
 });
 client.loginBot("YOUR_BOT_TOKEN_HERE");
 ```
@@ -65,10 +65,10 @@ EsModule
 //...
 import { Handler } from "revolthandler.js";
 const handler = new Handler({
-  client: client, //required
-  prefix: "!", //required
-  owners: ["Your Revolt ID"], //required , optional add more owner Id
-  path: "./commands", //optinal, (default : "./commands")
+    client: client, //required
+    prefix: "!", //required
+    owners: ["Your Revolt ID"], //required , optional add more owner Id
+    path: "./commands", //optinal, (default : "./commands")
 });
 //...
 ```
@@ -80,13 +80,13 @@ CommonJS
 ```js
 //"./commands/general/ping.js"
 exports.default = {
-  name: "ping",
-  description: "Ping!", //description :P
-  //Be careful
-  code(message, args, client) {
-    //Your code here
-    message.channel.sendMessage("Pong");
-  },
+    name: "ping",
+    description: "Ping!", //description :P
+    //Be careful
+    code(message, args, client) {
+        //Your code here
+        message.channel.sendMessage("Pong");
+    },
 };
 ```
 
@@ -107,13 +107,13 @@ export default {
 ```js
 //"./commands/general/ping.js"
 exports.default = {
-  name: "ping",
-  aliases: ["delay"],
-  description: "Ping!", //description :P
-  //Be careful
-  code(message, args, client) {
-    //Your code here
-  },
+    name: "ping",
+    aliases: ["delay"],
+    description: "Ping!", //description :P
+    //Be careful
+    code(message, args, client) {
+        //Your code here
+    },
 };
 ```
 
@@ -122,18 +122,18 @@ exports.default = {
 ```js
 //"./commands/owner/test.js"
 exports.default = {
-  name: "eval",
-  aliases: ["eval"],
-  ownerOnly: {
-    status: true,
-    errorMsg(message, author, command) {
-      //optional
-      message.reply("You can't use this command");
+    name: "eval",
+    aliases: ["eval"],
+    ownerOnly: {
+        status: true,
+        errorMsg(message, author, command) {
+            //optional
+            message.reply("You can't use this command");
+        },
     },
-  },
-  code(message, args, client) {
-    //your code here
-  },
+    code(message, args, client) {
+        //your code here
+    },
 };
 ```
 
@@ -142,19 +142,21 @@ exports.default = {
 ```js
 //"./commands/moderate/perm.js"
 exports.default = {
-  name: "perm",
-  ownerPerms: {
-    perms: ["KickMembers"], //You can see the perm names in : https://revolt.js.org/modules/permissions_definitions.html#Permission (onlyString)
-    errorMsg(message, member, command, perms) {
-      //optional
-      message.reply(
-        `You must have ${perms.join(",")} permission(s) to use this command`
-      );
+    name: "perm",
+    ownerPerms: {
+        perms: ["KickMembers"], //You can see the perm names in : https://revolt.js.org/modules/permissions_definitions.html#Permission (onlyString)
+        errorMsg(message, member, command, perms) {
+            //optional
+            message.reply(
+                `You must have ${perms.join(
+                    ","
+                )} permission(s) to use this command`
+            );
+        },
+        code(msg, args, client) {
+            //Your code here
+        },
     },
-    code(msg, args, client) {
-      //Your code here
-    },
-  },
 };
 ```
 
@@ -163,18 +165,18 @@ exports.default = {
 ```js
 //"./commands/general/indm.js"
 exports.default = {
-  name: "indm",
-  allowDM: {
-    //be careful "DM", not "Dm or dm"
-    status: true,
-    errorMsg(message, author, client) {
-      //optional
-      message.reply("You can't use this commmand in dm or group");
+    name: "indm",
+    allowDM: {
+        //be careful "DM", not "Dm or dm"
+        status: true,
+        errorMsg(message, author, client) {
+            //optional
+            message.reply("You can't use this commmand in dm or group");
+        },
+        code(message, args, client) {
+            //Your code here
+        },
     },
-    code(message, args, client) {
-      //Your code here
-    },
-  },
 };
 ```
 
@@ -183,11 +185,11 @@ exports.default = {
 ```js
 //"./commands/general/nonprefixed.js"
 exports.default = {
-  name: "withoutprefix", //WARN : The command name is case sensitive here!
-  nonPrefixed: true,
-  code(message, args, client) {
-    //Your code here
-  },
+    name: "withoutprefix", //WARN : The command name is case sensitive here!
+    nonPrefixed: true,
+    code(message, args, client) {
+        //Your code here
+    },
 };
 ```
 
@@ -198,25 +200,25 @@ exports.default = {
 ```js
 const { EmbedBuilder, Uploader } = require("revolthandler.js");
 exports.default = {
-  name: "coolembed",
-  async code(message, args, client) {
-    const myuploader = new Uploader(client);
-    const myemb = new EmbedBuilder();
-    myemb
-      .setDescription("Cool describe")
-      .setColour("red") //hex code or name is acceptable
-      .setTitle("Cool title")
-      .setMedia(
-        await myuploader.upload("imagelink/imagebuffer", "filename.png")
-      ) ////You can add an big picture or file
-      .setUrl("https://www.npmjs.com/package/revolthandler.js")
-      .setIconUrl("imagelink"); //You can add an picture in front of the title
-    message.channel.sendMessage({ embeds: [myemb] });
-  },
+    name: "coolembed",
+    async code(message, args, client) {
+        const myuploader = new Uploader(client);
+        const myemb = new EmbedBuilder();
+        myemb
+            .setDescription("Cool describe")
+            .setColour("red") //hex code or name is acceptable
+            .setTitle("Cool title")
+            .setMedia(
+                await myuploader.upload("imagelink/imagebuffer", "filename.png")
+            ) ////You can add an big picture or file
+            .setUrl("https://www.npmjs.com/package/revolthandler.js")
+            .setIconUrl("imagelink"); //You can add an picture in front of the title
+        message.channel.sendMessage({ embeds: [myemb] });
+    },
 };
 ```
 
-- [Come to my server](https://rvlt.gg/zrmFWtJz)
+-   [Come to my server](https://rvlt.gg/zrmFWtJz)
 
 # Will add new features in the future
 
