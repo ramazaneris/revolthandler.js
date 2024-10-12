@@ -44,8 +44,8 @@ const messageCreate = (handler, clientCommands) => {
                 }
             }
             if (
-                command?.permissions.length > 0 ||
-                command?.permissions.perms.length > 0
+                command?.permissions?.length > 0 ||
+                command?.permissions?.perms?.length > 0
             ) {
                 if (
                     !message.member.hasPermission(
