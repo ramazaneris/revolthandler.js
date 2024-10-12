@@ -106,7 +106,7 @@ exports.default = {
     name: ["ping", "delay"],
     description: "Ping!", //description :P
     //Be careful
-    code(message, args, client) {
+    code(message, args, client /*,command*/) {
         //Your code here
     },
 };
@@ -119,8 +119,7 @@ exports.default = {
 exports.default = {
     name: ["eval", "deneme"],
     ownerOnly: {
-        status: true,
-        errorMsg(message, author, command) {
+        errorMsg(message, args, client, command) {
             //optional
             message.reply("You can't use this command");
         },
@@ -138,13 +137,24 @@ exports.default = {
 exports.default = {
     name: "perm",
     permissions: {
-        perms: ["KickMembers"], //You can see the perm names in : https://revolt.js.org/classes/ServerMember.html#hasPermission
-        errorMsg(message, member, command, perms) {
+        perms: {
+            user: ["KickMembers"],
+            bot: ["KickMembers"],
+        }, //You can see the perm names in : https://revolt.js.org/classes/ServerMember.html#hasPermission
+        errorMsg(message, args, client, command) {
             //optional
             message.reply(
-                `You must have ${perms.join(
+                `You must have ${command.permission.perms.user.join(
                     ","
                 )} permission(s) to use this command`
+            );
+        },
+        botErrorMsg(message, args, client, command) {
+            //optional
+            message.reply(
+                `I need the ${command.permission.perms.bot.join(
+                    ","
+                )} permission(s) to execute this command`
             );
         },
     },
