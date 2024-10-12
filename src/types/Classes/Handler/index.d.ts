@@ -4,8 +4,8 @@ declare class Handler {
     constructor(opts: {
         client: Client;
         prefix: string;
-        owners: string[];
-        path: string;
+        owners?: string[];
+        path?: string;
     });
     public start(): void;
 }
