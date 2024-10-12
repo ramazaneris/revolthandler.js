@@ -14,8 +14,8 @@ Easy command handling for revolt.js
         -   [Standart](#standart-using-example)
         -   [Aliases](#aliases-example)
         -   [ownerOnly](#only-owner-command-example)
-        -   [onlyPerms](#only-perms-command-example)
-        -   [allowDM](#allow-dm)
+        -   [permissions](#only-perms-command-example)
+        -   [guildOnly](#guild-only)
         -   [NonPrefixed](#non-prefixed)
     -   [Embed Builder & Uploader](#embed-builder--uploader)
 
@@ -46,7 +46,7 @@ const revoltHandler = require("revolthandler.js");
 const handler = new revoltHandler.Handler({
     client: client, //required
     prefix: "!", //required
-    owners: ["Your Revolt ID"], //required , optional add more owner Id
+    owners: ["Your Revolt ID"], //optional , optional add more owner Id
     path: "./commands", //optional, (default : "./commands")
 });
 client.once("ready", () => {
@@ -63,7 +63,7 @@ import { Handler } from "revolthandler.js";
 const handler = new Handler({
     client: client, //required
     prefix: "!", //required
-    owners: ["Your Revolt ID"], //required , optional add more owner Id
+    owners: ["Your Revolt ID"], //optional , optional add more owner Id
     path: "./commands", //optinal, (default : "./commands")
 });
 //...
@@ -103,8 +103,7 @@ export default {
 ```js
 //"./commands/general/ping.js"
 exports.default = {
-    name: "ping",
-    aliases: ["delay"],
+    name: ["ping", "delay"],
     description: "Ping!", //description :P
     //Be careful
     code(message, args, client) {
@@ -118,8 +117,7 @@ exports.default = {
 ```js
 //"./commands/owner/test.js"
 exports.default = {
-    name: "eval",
-    aliases: ["eval"],
+    name: ["eval", "deneme"],
     ownerOnly: {
         status: true,
         errorMsg(message, author, command) {
@@ -133,14 +131,14 @@ exports.default = {
 };
 ```
 
-#### Only perm(s) command example
+#### Only perms command example
 
 ```js
 //"./commands/moderate/perm.js"
 exports.default = {
     name: "perm",
-    ownerPerms: {
-        perms: ["KickMembers"], //You can see the perm names in : https://revolt.js.org/modules/permissions_definitions.html#Permission (onlyString)
+    permissions: {
+        perms: ["KickMembers"], //You can see the perm names in : https://revolt.js.org/classes/ServerMember.html#hasPermission
         errorMsg(message, member, command, perms) {
             //optional
             message.reply(
@@ -149,29 +147,27 @@ exports.default = {
                 )} permission(s) to use this command`
             );
         },
-        code(msg, args, client) {
-            //Your code here
-        },
+    },
+    code(msg, args, client) {
+        //Your code here
     },
 };
 ```
 
-#### Allow DM
+#### Guild Only
 
 ```js
 //"./commands/general/indm.js"
 exports.default = {
-    name: "indm",
-    allowDM: {
-        //be careful "DM", not "Dm or dm"
-        status: true,
+    name: "in-server",
+    guildOnly: {
         errorMsg(message, author, client) {
             //optional
             message.reply("You can't use this commmand in dm or group");
         },
-        code(message, args, client) {
-            //Your code here
-        },
+    },
+    code(message, args, client) {
+        //Your code here
     },
 };
 ```
@@ -216,6 +212,4 @@ exports.default = {
 
 -   [Come to my server](https://rvlt.gg/zrmFWtJz)
 
-# Will add new features in the future
-
-# revolthandler.js
+## Will add new features in the future

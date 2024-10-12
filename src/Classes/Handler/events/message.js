@@ -23,7 +23,7 @@ const messageCreate = (handler, clientCommands) => {
         try {
             if (!command) return;
             if (command?.ownerOnly) {
-                if (handler.owners.includes(message.author.id)) return;
+                if (handler?.owners.includes(message.author.id)) return;
                 if (command?.ownerOnly?.errorMessage) {
                     command.ownerOnly.errorMessage(message, args, client);
                     return;
@@ -43,15 +43,23 @@ const messageCreate = (handler, clientCommands) => {
                     return;
                 }
             }
-            if (command?.permissions) {
+            if (
+                command?.permissions.length > 0 ||
+                command?.permissions.perms.length > 0
+            ) {
                 if (
                     !message.member.hasPermission(
                         message.channel,
-                        ...command.permissions
+                        ...(command.permissions || command.permissions.perms)
                     )
                 ) {
                     if (command?.permissions?.errorMessage) {
-                        command.permissions.errorMessage(message, args, client);
+                        command.permissions.errorMessage(
+                            message,
+                            args,
+                            client,
+                            command.permissions.perms
+                        );
                         return;
                     } else {
                         message.reply(
@@ -61,7 +69,7 @@ const messageCreate = (handler, clientCommands) => {
                     }
                 }
             }
-            command.code(message, args, handler);
+            command.code(message, args, handler.client);
         } catch (err) {
             console.error(err);
         }
