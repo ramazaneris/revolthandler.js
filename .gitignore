@@ -2,3 +2,5 @@
 .env
 /tests
 pnpm-lock.yaml
+test.js
+/commands

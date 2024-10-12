@@ -25,7 +25,7 @@ type ColorOptions = keyof typeof Colors | HexToString;
 
 type HexToString = `#${string}`;
 
-export declare class EmbedBuilder {
+declare class EmbedBuilder {
     icon_url?: string;
     url?: string;
     title?: string;
@@ -83,3 +83,5 @@ export declare class EmbedBuilder {
      */
     toJson(): this;
 }
+
+export { EmbedBuilder };

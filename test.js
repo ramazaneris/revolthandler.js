@@ -1,19 +1,18 @@
 const { Client } = require("revolt.js");
-const { Handler } = require("./src/index");
-const { Uploader } = require("./src/index");
+const { Handler, EmbedBuilder } = require("./src/index.js");
+const { config } = require("dotenv");
+config();
 
-require("dotenv/config");
-const bot = new Client();
+const client = new Client({ debug: false });
 const handler = new Handler({
-    client: bot,
-    prefix: "/",
-    owners: ["01FCXFBQPYCBZWX40NSBYXYAWW"],
-    path: "./tests",
+    client: client,
+    prefix: "!",
+    owners: [],
 });
 
-bot.on("ready", () => {
-    console.log("Bot ready!");
+client.on("ready", () => {
+    console.log("Ready");
     handler.start();
 });
 
-bot.loginBot(`${process.env.BOT_TOKEN}`);
+client.loginBot(`${process.env.BOT_TOKEN}`);
