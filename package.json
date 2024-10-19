@@ -1,6 +1,6 @@
 {
     "name": "revolthandler.js",
-    "version": "2.4.3",
+    "version": "2.4.31",
     "description": "Handle your code for revolt.js",
     "main": "src/index.js",
     "types": "src/index.d.ts",

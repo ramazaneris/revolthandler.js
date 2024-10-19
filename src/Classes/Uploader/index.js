@@ -10,7 +10,7 @@ class Uploader {
         let urlRegex =
             /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gi;
 
-        if (file.match(urlRegex)) {
+        if (String(file).match(urlRegex)) {
             return new Promise((resolve, reject) => {
                 fetch(file, { method: "GET" })
                     .then((response) => response.blob())
@@ -30,7 +30,7 @@ class Uploader {
         } else {
             return new Promise((resolve, reject) => {
                 const form = new FormData();
-                form.append("file", file, fileName);
+                form.append("file", new Blob([file]), fileName);
                 fetch(`${this.autumn}/attachments`, {
                     method: "POST",
                     body: form,
